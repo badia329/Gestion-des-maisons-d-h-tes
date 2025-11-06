@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Owner Dashboard - The Palatin</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styleOwner.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul id="headerDiv"></ul>
+                                <div class="menu-btn">
+                                    <a href="#" onclick="logout()" class="btn palatin-btn">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/16.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Owner Dashboard</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Owner Dashboard Section ##### -->
+    <section class="owner-dashboard">
+        <div class="container">
+
+            <!-- Owner Header -->
+            <div class="owner-header">
+                <h1><i class="fas fa-home"></i> Owner Dashboard</h1>
+                <p>Welcome back, <strong id="ownerName">Owner</strong> - Manage your properties</p>
+            </div>
+
+            <!-- Owner Navigation -->
+            <div class="owner-nav text-center">
+                <a href="#" class="owner-nav-btn active" onclick="showSection('dashboard')">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="owner-nav-btn" onclick="showSection('maisons')">
+                    <i class="fas fa-home"></i> My Maisons
+                </a>
+                <a href="#" class="owner-nav-btn" onclick="showSection('add-maison')">
+                    <i class="fas fa-plus"></i> Add Maison
+                </a>
+                <a href="#" class="owner-nav-btn" onclick="showSection('reservations')">
+                    <i class="fas fa-calendar-check"></i> Réservations
+                </a>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div id="dashboard-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-home"></i>
+                        <h3 id="totalMaisons">0</h3>
+                        <p>My Maisons</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-bed"></i>
+                        <h3 id="totalChambres">0</h3>
+                        <p>Total Chambres</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3 id="totalReservations">0</h3>
+                        <p>Réservations</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3 id="totalRevenue">0 DT</h3>
+                        <p>Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Maisons Section -->
+            <div id="maisons-section" style="display: none;">
+                <div class="data-section">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="section-title mb-0"><i class="fas fa-home"></i> My Maisons d'hôtes</h2>
+                    </div>
+                    <div class="row" id="houseOwnerDiv">
+                        <!-- Houses will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Maison Section -->
+            <div id="add-maison-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-plus"></i> Add New Maison</h2>
+                    <form id="addHouseForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="houseNameInput">House Name</label>
+                                    <input type="text" id="houseNameInput" placeholder="Enter house name">
+                                    <div class="error-message" id="houseNameError"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cityInput">City</label>
+                                    <input type="text" id="cityInput" placeholder="Enter city">
+                                    <div class="error-message" id="cityError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="addressInput">Address</label>
+                            <input type="text" id="addressInput" placeholder="Enter full address">
+                            <div class="error-message" id="addressError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descriptionInput">Description</label>
+                            <textarea id="descriptionInput" placeholder="Describe your house..."></textarea>
+                            <div class="error-message" id="descriptionError"></div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-cancel" onclick="showSection('maisons')">Cancel</button>
+                            <button type="button" class="btn-add" onclick="addHouse()">
+                                <i class="fas fa-plus"></i> Add House
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Edit Maison Section -->
+            <div id="edit-maison-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-edit"></i> Edit Maison</h2>
+                    <form id="editHouseForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editHouseNameInput">House Name</label>
+                                    <input type="text" id="editHouseNameInput" placeholder="Enter house name">
+                                    <div class="error-message" id="editHouseNameError"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editCityInput">City</label>
+                                    <input type="text" id="editCityInput" placeholder="Enter city">
+                                    <div class="error-message" id="editCityError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editAddressInput">Address</label>
+                            <input type="text" id="editAddressInput" placeholder="Enter full address">
+                            <div class="error-message" id="editAddressError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="editDescriptionInput">Description</label>
+                            <textarea id="editDescriptionInput" placeholder="Describe your house..."></textarea>
+                            <div class="error-message" id="editDescriptionError"></div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-cancel" onclick="showSection('maisons')">Cancel</button>
+                            <button type="button" class="btn-add" onclick="updateHouse()">
+                                <i class="fas fa-save"></i> Update House
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Reservations Section -->
+            <div id="reservations-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-calendar-check"></i> My Réservations</h2>
+                    <div id="reservationsContainer">
+                        <!-- Reservations will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="footer-widget-area mt-50">
+                        <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                            sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                            finibus. </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Find us on the map</h6>
+                        <img src="img/bg-img/footer-map.png" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                        <form action="#" method="post" class="subscribe-form">
+                            <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="copywrite-text mt-30">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/owner.js"></script>
+    <script>
+        generateHeader();
+        loadOwnerData();
+        calculateStats();
+    </script>
+
+</body>
+
+</html>
