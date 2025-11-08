@@ -151,7 +151,7 @@ function createHouseCard(house, roomCount, minPrice) {
   return `
     <div class="col-12 col-md-6 col-lg-4 mb-4">
       <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
-        <div class="bg-thumbnail bg-img" style="background-image: url('img/bg-img/16.jpg'); height: 250px;"></div>
+        <div class="bg-thumbnail bg-img" style="background-image: url('${house.imageUrl || "img/bg-img/16.jpg"}'); height: 250px;"></div>
         ${minPrice ? `<p class="price-from">From ${minPrice} DT/night</p>` : ''}
         
         <div class="rooms-text" style="padding: 30px;">

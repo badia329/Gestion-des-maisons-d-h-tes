@@ -30,7 +30,7 @@ function displayHouses() {
       content += `
         <div class="col-12 col-md-6 col-lg-4 mb-4">
           <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
-            <div class="bg-thumbnail bg-img" style="background-image: url('img/bg-img/16.jpg'); height: 250px;"></div>
+            <div class="bg-thumbnail bg-img" style="background-image: url('${housesTab[i].imageUrl || "img/bg-img/16.jpg"}'); height: 250px;"></div>
             ${minPrice ? `<p class="price-from">From ${minPrice} DT/night</p>` : ''}
             
             <div class="rooms-text" style="padding: 30px;">
@@ -74,7 +74,7 @@ function goToRooms(houseId) {
 
 function displayRooms() {
   const houseId = localStorage.getItem("selectedHouseId");
-  
+  // Security measures to close a gap
   if (!houseId) {
     alert("No house selected!");
     location.replace("index.html");
@@ -99,7 +99,7 @@ function displayRooms() {
       content += `
         <div class="col-12 col-md-6 col-lg-4 mb-4">
           <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
-            <div class="bg-thumbnail bg-img" style="background-image: url('img/bg-img/1.jpg'); height: 200px;"></div>
+           <div class="bg-thumbnail bg-img" style="background-image: url('${roomsTab[i].imageUrl || "img/bg-img/1.jpg"}'); height: 200px;"></div>
             <p class="price-from">From ${roomsTab[i].price} DT/night</p>
             
             <div class="rooms-text" style="padding: 30px;">
@@ -188,7 +188,7 @@ function loadRoomForBooking() {
   document.getElementById("roomCapacity").textContent = room.capacity;
   document.getElementById("roomPrice").textContent = room.price;
   document.getElementById("roomDescription").textContent = room.description;
-  
+  // security
   if (house) {
     document.getElementById("houseName").textContent = house.houseName;
   }
@@ -201,7 +201,6 @@ function loadRoomForBooking() {
   document.getElementById("checkInInput").setAttribute("min", today);
   document.getElementById("checkOutInput").setAttribute("min", today);
 }
-
 // ==================== CALCULATE BOOKING PRICE ====================
 
 function calculateBookingPrice() {

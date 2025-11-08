@@ -2316,3 +2316,10 @@ img {
 .required {
   color: #dc3545;
 }
+.pool-area .register-form label {
+  color: #fff;
+  font-weight: 500;
+}
+.breadcumb-title {
+  color: white;
+}

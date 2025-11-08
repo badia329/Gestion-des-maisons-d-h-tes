@@ -124,14 +124,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><i class="fas fa-calendar-check"></i> Check-in Date *</label>
-                                        <input type="date" class="form-control" id="checkInInput" 
+                                        <input type="date" class="form-control" id="checkInInput"
                                             onchange="calculateBookingPrice()">
                                     </div>
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><i class="fas fa-calendar-times"></i> Check-out Date *</label>
-                                        <input type="date" class="form-control" id="checkOutInput" 
+                                        <input type="date" class="form-control" id="checkOutInput"
                                             onchange="calculateBookingPrice()">
                                     </div>
                                 </div>
@@ -141,17 +142,15 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label><i class="fas fa-users"></i> Number of Guests *</label>
-                                        <input type="number" class="form-control" id="guestsInput" 
-                                            min="1" placeholder="Enter number of guests"
-                                            onchange="calculateBookingPrice()">
-                                    </div>
+                                        <input type="number" class="form-control" id="guestsInput" min="1"
+                                            placeholder="Enter number of guests" onchange="calculateBookingPrice()">
+                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <button type="button" onclick="confirmBooking()" 
-                                        class="btn palatin-btn mt-30">
+                                    <button type="button" onclick="confirmBooking()" class="btn palatin-btn mt-30">
                                         <i class="fas fa-check-circle"></i> Confirm Booking
                                     </button>
                                     <a href="javascript:history.back()" class="btn btn-secondary mt-30 ml-2">

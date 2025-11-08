@@ -61,7 +61,9 @@ function signUp() {
   );
 
   // User Type
-  const userType = document.querySelector('input[name="userType"]:checked').value;
+  const userType = document.querySelector(
+    'input[name="userType"]:checked'
+  ).value;
 
   // Check all validations
   if (
@@ -83,11 +85,11 @@ function signUp() {
         password: password,
         address: address,
         role: "owner",
-        status: "pending"
+        status: "pending",
       };
       usersData.push(owner);
       saveData("users", usersData);
-      alert("Registration successful! Wait for admin approval.");
+      // alert("Registration successful! Wait for admin approval.");
     } else {
       const client = {
         id: generateId(usersData),
@@ -97,7 +99,7 @@ function signUp() {
         tel: tel,
         password: password,
         address: address,
-        role: "client"
+        role: "client",
       };
       usersData.push(client);
       saveData("users", usersData);
@@ -111,25 +113,25 @@ function signUp() {
 function login() {
   const email = getValue("loginEmailInput");
   const password = getValue("loginPasswordInput");
-  
+
   const usersData = getStoredData("users");
-  
+
   if (!email || !password) {
-    alert("Please fill all fields");
+    setText("login-error", "Please fill all fields", "red");
     return;
   }
-  
+
   for (let i = 0; i < usersData.length; i++) {
     if (usersData[i].email == email && usersData[i].password == password) {
       // Check if owner and not approved
       if (usersData[i].role == "owner" && usersData[i].status == "pending") {
-        alert("Your account is pending admin approval");
+        setText("login-error", "Your account is pending admin approval", "red");
         return;
       }
-      
+
       // Save user ID
       localStorage.setItem("connectedUser", usersData[i].id);
-      
+
       // Redirect based on role
       if (usersData[i].role == "admin") {
         location.replace("admin-dashboard.html");
@@ -141,6 +143,7 @@ function login() {
       return;
     }
   }
-  
-  alert("Invalid email or password");
+
+  // alert("Invalid email or password");
+  setText("errorLogin","Invalid email or password", "red")
 }

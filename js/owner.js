@@ -3,7 +3,7 @@
 // Load owner data on page load
 function loadOwnerData() {
   const connectedUserId = localStorage.getItem("connectedUser");
-  
+
   if (!connectedUserId) {
     alert("Please login first!");
     location.replace("login.html");
@@ -11,7 +11,7 @@ function loadOwnerData() {
   }
 
   const user = searchObjByIdAndKey(connectedUserId, "users");
-  
+
   if (!user || user.role !== "owner") {
     alert("Access denied!");
     location.replace("login.html");
@@ -24,13 +24,20 @@ function loadOwnerData() {
     return;
   }
 
-  document.getElementById("ownerName").textContent = user.firstName + " " + user.lastName;
+  document.getElementById("ownerName").textContent =
+    user.firstName + " " + user.lastName;
   displayOwnerHouses();
 }
 
 // Show section
 function showSection(section) {
-  const sections = ["dashboard", "maisons", "add-maison", "edit-maison", "reservations"];
+  const sections = [
+    "dashboard",
+    "maisons",
+    "add-maison",
+    "edit-maison",
+    "reservations",
+  ];
 
   sections.forEach((s) => {
     const elem = document.getElementById(s + "-section");
@@ -41,8 +48,10 @@ function showSection(section) {
 
   const navBtns = document.querySelectorAll(".owner-nav-btn");
   navBtns.forEach((btn) => btn.classList.remove("active"));
-  
-  const activeBtn = document.querySelector(`.owner-nav-btn[onclick="showSection('${section}')"]`);
+
+  const activeBtn = document.querySelector(
+    `.owner-nav-btn[onclick="showSection('${section}')"]`
+  );
   if (activeBtn) {
     activeBtn.classList.add("active");
   }
@@ -131,27 +140,35 @@ function addHouse() {
     "descriptionError",
     "Description must be at least 10 characters"
   );
+  const imageUrl = getValue("imageUrlInput") || "img/bg-img/16.jpg";
 
-  if (isHouseNameValid && isCityNameValid && isAddressValid && isDescriptionValid) {
+  if (
+    isHouseNameValid &&
+    isCityNameValid &&
+    isAddressValid &&
+    isDescriptionValid
+  ) {
     const house = {
       id: generateId(housesTab),
       houseName: houseName,
       cityName: cityName,
       address: address,
       description: description,
-      ownerId: connectedUserId
+      ownerId: connectedUserId,
+      imageUrl: imageUrl,
     };
 
     housesTab.push(house);
     saveData("houses", housesTab);
 
     alert("House added successfully!");
-    
+
     document.getElementById("houseNameInput").value = "";
     document.getElementById("cityInput").value = "";
     document.getElementById("addressInput").value = "";
     document.getElementById("descriptionInput").value = "";
-    
+    document.getElementById("imageUrlInput").value = "";
+
     showSection("maisons");
   }
 }
@@ -248,7 +265,7 @@ function displayOwnerHouses() {
 // Edit house
 function editHouse(houseId) {
   const house = searchObjByIdAndKey(houseId, "houses");
-  
+
   if (!house) {
     alert("House not found!");
     return;
@@ -258,6 +275,7 @@ function editHouse(houseId) {
   document.getElementById("editCityInput").value = house.cityName;
   document.getElementById("editAddressInput").value = house.address;
   document.getElementById("editDescriptionInput").value = house.description;
+  document.getElementById("editImageUrlInput").value = house.imageUrl || "";
 
   localStorage.setItem("editingHouseId", houseId);
   showSection("edit-maison");
@@ -270,27 +288,49 @@ function updateHouse() {
 
   const houseName = getValue("editHouseNameInput");
   const isHouseNameValid = checkLength(houseName, 2);
-  validateField(isHouseNameValid, "editHouseNameError", "House name must be at least 2 characters");
+  validateField(
+    isHouseNameValid,
+    "editHouseNameError",
+    "House name must be at least 2 characters"
+  );
 
   const cityName = getValue("editCityInput");
   const isCityNameValid = checkLength(cityName, 2);
-  validateField(isCityNameValid, "editCityError", "City name must be at least 2 characters");
+  validateField(
+    isCityNameValid,
+    "editCityError",
+    "City name must be at least 2 characters"
+  );
 
   const address = getValue("editAddressInput");
   const isAddressValid = checkLength(address, 5);
-  validateField(isAddressValid, "editAddressError", "Address must be at least 5 characters");
+  validateField(
+    isAddressValid,
+    "editAddressError",
+    "Address must be at least 5 characters"
+  );
 
   const description = getValue("editDescriptionInput");
   const isDescriptionValid = checkLength(description, 10);
-  validateField(isDescriptionValid, "editDescriptionError", "Description must be at least 10 characters");
-
-  if (isHouseNameValid && isCityNameValid && isAddressValid && isDescriptionValid) {
+  validateField(
+    isDescriptionValid,
+    "editDescriptionError",
+    "Description must be at least 10 characters"
+  );
+  const imageUrl = getValue("editImageUrlInput") || "img/bg-img/16.jpg";
+  if (
+    isHouseNameValid &&
+    isCityNameValid &&
+    isAddressValid &&
+    isDescriptionValid
+  ) {
     for (let i = 0; i < housesTab.length; i++) {
       if (housesTab[i].id == houseId) {
         housesTab[i].houseName = houseName;
         housesTab[i].cityName = cityName;
         housesTab[i].address = address;
         housesTab[i].description = description;
+        housesTab[i].imageUrl = imageUrl;
         break;
       }
     }
@@ -335,7 +375,7 @@ function deleteHouse(houseId) {
 // Go to add room page
 function goToAddRoom(houseId) {
   const roomsTab = getStoredData("rooms");
-  
+
   let roomCount = 0;
   for (let i = 0; i < roomsTab.length; i++) {
     if (roomsTab[i].houseId == houseId) {
@@ -344,7 +384,9 @@ function goToAddRoom(houseId) {
   }
 
   if (roomCount >= 5) {
-    alert("Maximum 5 rooms per house! You already have " + roomCount + " rooms.");
+    alert(
+      "Maximum 5 rooms per house! You already have " + roomCount + " rooms."
+    );
     return;
   }
 
@@ -357,7 +399,7 @@ function goToAddRoom(houseId) {
 // Load selected house (for addRoom.html page)
 function loadSelectedHouse() {
   const houseId = localStorage.getItem("selectedHouseId");
-  
+
   if (!houseId) {
     alert("No house selected!");
     location.replace("owner-dashboard.html");
@@ -365,7 +407,7 @@ function loadSelectedHouse() {
   }
 
   const house = searchObjByIdAndKey(houseId, "houses");
-  
+
   if (!house) {
     alert("House not found!");
     location.replace("owner-dashboard.html");
@@ -410,7 +452,11 @@ function addRoom() {
 
   const name = getValue("roomNameInput");
   const isNameValid = checkLength(name, 2);
-  showError("nameError", !isNameValid, "Room name must be at least 2 characters");
+  showError(
+    "nameError",
+    !isNameValid,
+    "Room name must be at least 2 characters"
+  );
 
   const type = getValue("roomTypeInput");
   const isTypeValid = type !== "";
@@ -418,7 +464,11 @@ function addRoom() {
 
   const capacity = getValue("capacityInput");
   const isCapacityValid = capacity > 0 && capacity <= 10;
-  showError("capacityError", !isCapacityValid, "Capacity must be between 1 and 10");
+  showError(
+    "capacityError",
+    !isCapacityValid,
+    "Capacity must be between 1 and 10"
+  );
 
   const price = getValue("priceInput");
   const isPriceValid = price > 0;
@@ -426,9 +476,20 @@ function addRoom() {
 
   const description = getValue("descriptionInput");
   const isDescriptionValid = checkLength(description, 10);
-  showError("descriptionError", !isDescriptionValid, "Description must be at least 10 characters");
+  showError(
+    "descriptionError",
+    !isDescriptionValid,
+    "Description must be at least 10 characters"
+  );
+  const imageUrl = getValue("roomImageUrl") || "img/bg-img/1.jpg";
 
-  if (isNameValid && isTypeValid && isCapacityValid && isPriceValid && isDescriptionValid) {
+  if (
+    isNameValid &&
+    isTypeValid &&
+    isCapacityValid &&
+    isPriceValid &&
+    isDescriptionValid
+  ) {
     const house = searchObjByIdAndKey(houseId, "houses");
 
     const room = {
@@ -441,7 +502,8 @@ function addRoom() {
       houseId: houseId,
       houseName: house.houseName,
       ownerId: connectedUserId,
-      available: true
+      available: true,
+      imageUrl: imageUrl,
     };
 
     roomsTab.push(room);
@@ -474,10 +536,10 @@ function displayOwnerReservations() {
 
   for (let i = 0; i < reservationsTab.length; i++) {
     const room = searchObjByIdAndKey(reservationsTab[i].roomId, "rooms");
-    
+
     if (room && room.ownerId == connectedUserId) {
       hasReservations = true;
-      
+
       const client = searchObjByIdAndKey(reservationsTab[i].userId, "users");
       const house = searchObjByIdAndKey(room.houseId, "houses");
 
@@ -486,15 +548,27 @@ function displayOwnerReservations() {
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
-                <h5><i class="fas fa-user"></i> ${client ? client.firstName + " " + client.lastName : "Unknown"}</h5>
-                <p><i class="fas fa-home"></i> ${house ? house.houseName : "Unknown House"}</p>
+                <h5><i class="fas fa-user"></i> ${
+                  client ? client.firstName + " " + client.lastName : "Unknown"
+                }</h5>
+                <p><i class="fas fa-home"></i> ${
+                  house ? house.houseName : "Unknown House"
+                }</p>
                 <p><i class="fas fa-bed"></i> ${room.name}</p>
               </div>
               <div class="col-md-6">
-                <p><i class="fas fa-calendar-alt"></i> ${reservationsTab[i].checkIn} → ${reservationsTab[i].checkOut}</p>
-                <p><i class="fas fa-moon"></i> ${reservationsTab[i].nights} nights</p>
-                <p><i class="fas fa-users"></i> ${reservationsTab[i].guests} guests</p>
-                <p><strong><i class="fas fa-money-bill-wave"></i> ${reservationsTab[i].totalPrice} DT</strong></p>
+                <p><i class="fas fa-calendar-alt"></i> ${
+                  reservationsTab[i].checkIn
+                } → ${reservationsTab[i].checkOut}</p>
+                <p><i class="fas fa-moon"></i> ${
+                  reservationsTab[i].nights
+                } nights</p>
+                <p><i class="fas fa-users"></i> ${
+                  reservationsTab[i].guests
+                } guests</p>
+                <p><strong><i class="fas fa-money-bill-wave"></i> ${
+                  reservationsTab[i].totalPrice
+                } DT</strong></p>
               </div>
             </div>
           </div>
