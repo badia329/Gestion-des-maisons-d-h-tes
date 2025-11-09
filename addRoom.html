@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title -->
+    <title>Ajouter Chambre - The Palatin</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul id="headerDiv"></ul>
+                                <div class="menu-btn">
+                                    <a href="owner-dashboard.html" class="btn palatin-btn">Back to Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/16.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Ajouter une Chambre</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Add Chambre Section Start ##### -->
+    <section class="contact-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center wow fadeInUp">
+                        <div class="line-"></div>
+                        <h2>Ajouter une Chambre</h2>
+                        <p>Remplissez les informations de la chambre (Maximum 5 chambres par maison)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="contact-form-area mb-100 wow fadeInUp">
+                        <div>
+                            <!-- House Selection -->
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i>
+                                        <strong>Selected House:</strong> <span id="selectedHouseName">Loading...</span>
+                                        <br>
+                                        <small>Current rooms: <span id="currentRoomCount">0</span>/5</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="roomNameInput"><i class="fas fa-bed"></i> Room Name *</label>
+                                        <input type="text" class="form-control" id="roomNameInput"
+                                            placeholder="Ex: Deluxe Room">
+                                        <small class="form-text text-danger" id="nameError"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="roomTypeInput"><i class="fas fa-tag"></i> Room Type *</label>
+                                        <select class="form-control" id="roomTypeInput">
+                                            <option value="">Choose a type</option>
+                                            <option value="Standard">Standard</option>
+                                            <option value="Deluxe">Deluxe</option>
+                                            <option value="Suite">Suite</option>
+                                            <option value="Family">Family</option>
+                                        </select>
+                                        <small class="form-text text-danger" id="typeError"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="capacityInput"><i class="fas fa-users"></i> Capacity (People)
+                                            *</label>
+                                        <input type="number" class="form-control" id="capacityInput" placeholder="Ex: 2"
+                                            min="1" max="10">
+                                        <small class="form-text text-danger" id="capacityError"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="priceInput"><i class="fas fa-dollar-sign"></i> Price per Night (DT)
+                                            *</label>
+                                        <input type="number" class="form-control" id="priceInput" placeholder="Ex: 150"
+                                            min="0" step="0.01">
+                                        <small class="form-text text-danger" id="priceError"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="descriptionInput"><i class="fas fa-align-left"></i> Room
+                                            Description *</label>
+                                        <textarea class="form-control" id="descriptionInput" rows="6"
+                                            placeholder="Describe the room, its amenities, and advantages..."></textarea>
+                                        <small class="form-text text-danger" id="descriptionError"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="roomImageUrl"><i class="fas fa-image"></i> Room Image URL
+                                            (Optional)</label>
+                                        <input type="text" class="form-control" id="roomImageUrl"
+                                            placeholder="https://example.com/room-image.jpg">
+                                        <small class="form-text text-muted">Enter an image URL or leave empty for
+                                            default image</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button onclick="addRoom()" class="btn palatin-btn mt-30">
+                                        <i class="fas fa-save"></i> Save Room
+                                    </button>
+                                    <a href="owner-dashboard.html" class="btn btn-secondary mt-30 ml-2">
+                                        <i class="fas fa-times"></i> Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ##### Add Chambre Section End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="footer-widget-area mt-50">
+                        <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                            sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                            finibus. </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Find us on the map</h6>
+                        <img src="img/bg-img/footer-map.png" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                        <form action="#" method="post" class="subscribe-form">
+                            <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="copywrite-text mt-30">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/owner.js"></script>
+    <script>
+        generateHeader();
+        loadSelectedHouse();
+    </script>
+</body>
+
+</html>

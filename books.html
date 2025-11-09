@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Make a Reservation - The Palatin</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul id="headerDiv"></ul>
+                                <div class="menu-btn">
+                                    <a href="basket.html" class="btn palatin-btn">My Reservations</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center"
+        style="background-image: url(img/bg-img/bg-6.jpg);">
+        <div class="bradcumbContent">
+            <h2>Make a Reservation</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Booking Area Start ##### -->
+    <section class="section-padding-100">
+        <div class="booking-container">
+            
+            <!-- Room Information -->
+            <div class="room-info-card">
+                <h3><i class="fas fa-bed"></i> Room Details</h3>
+                <div class="room-detail-item">
+                    <i class="fas fa-door-open"></i>
+                    <span><strong>Room Name:</strong> <span id="roomName">-</span></span>
+                </div>
+                <div class="room-detail-item">
+                    <i class="fas fa-users"></i>
+                    <span><strong>Capacity:</strong> <span id="roomCapacity">-</span> Guests</span>
+                </div>
+                <div class="room-detail-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span><strong>Price:</strong> <span id="roomPrice">-</span> DT per night</span>
+                </div>
+                <div class="room-detail-item">
+                    <i class="fas fa-align-left"></i>
+                    <span><strong>Description:</strong> <span id="roomDescription">-</span></span>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="booking-form-card">
+                <h3 style="color: #c89b3f; margin-bottom: 25px;">
+                    <i class="fas fa-calendar-check"></i> Booking Information
+                </h3>
+
+                <form id="bookingForm" onsubmit="confirmBooking(event)">
+                    
+                    <!-- Check-in Date -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-calendar-alt"></i> Check-in Date <span class="required">*</span>
+                        </label>
+                        <input type="date" class="form-control" id="checkIn" required onchange="calculateTotal()">
+                        <span class="error-message" id="checkInError">Please select check-in date</span>
+                    </div>
+
+                    <!-- Check-out Date -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-calendar-alt"></i> Check-out Date <span class="required">*</span>
+                        </label>
+                        <input type="date" class="form-control" id="checkOut" required onchange="calculateTotal()">
+                        <span class="error-message" id="checkOutError">Please select check-out date</span>
+                    </div>
+
+                    <!-- Number of Guests -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-users"></i> Number of Guests <span class="required">*</span>
+                        </label>
+                        <input type="number" class="form-control" id="guests" min="1" required onchange="validateGuests()">
+                        <span class="error-message" id="guestsError">Number of guests cannot exceed room capacity</span>
+                    </div>
+
+                    <!-- Booking Summary -->
+                    <div class="booking-summary">
+                        <h5 style="margin-bottom: 15px;">
+                            <i class="fas fa-file-invoice"></i> Booking Summary
+                        </h5>
+                        <div class="summary-row">
+                            <span>Check-in:</span>
+                            <span id="summaryCheckIn">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Check-out:</span>
+                            <span id="summaryCheckOut">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Number of Nights:</span>
+                            <span id="summaryNights">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Guests:</span>
+                            <span id="summaryGuests">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Price per Night:</span>
+                            <span id="summaryPricePerNight">0 DT</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Total Price:</span>
+                            <span id="totalPrice">0 DT</span>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-check-circle"></i> Confirm Reservation
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+    <!-- ##### Booking Area End ##### -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="footer-widget-area mt-50">
+                        <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                            sceleri sque, at rutrum nulla dictum.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Find us on the map</h6>
+                        <img src="img/bg-img/footer-map.png" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                        <form action="#" method="post" class="subscribe-form">
+                            <input type="email" name="subscribe-email" placeholder="Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="copywrite-text mt-30">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/booking.js"></script>
+    
+</body>
+
+</html>

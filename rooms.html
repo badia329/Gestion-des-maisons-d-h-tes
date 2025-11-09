@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Available Rooms - The Palatin</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+   <header class="header-area">
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul id="headerDiv"></ul>
+                                <div class="menu-btn">
+
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/16.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Available Rooms</h3>
+                        <p style="color: #fff; margin-top: 10px;">
+                            <i class="fas fa-home"></i> <span id="selectedHouseName">Loading...</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rooms Section -->
+    <section class="contact-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center wow fadeInUp">
+                        <div class="line-"></div>
+                        <h2>Choose Your Room</h2>
+                        <p>Select from our comfortable and well-equipped rooms</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <a href="index.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Houses
+                    </a>
+                </div>
+            </div>
+
+            <!-- Rooms Grid -->
+            <div class="row mt-3" id="roomsDiv">
+                <!-- Rooms will be displayed here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="footer-widget-area mt-50">
+                        <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                            sceleri sque, at rutrum nulla dictum.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Find us on the map</h6>
+                        <img src="img/bg-img/footer-map.png" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                        <form action="#" method="post" class="subscribe-form">
+                            <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="copywrite-text mt-30">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/client.js"></script>
+    <script>
+        generateHeader();
+        displayRooms();
+    </script>
+</body>
+
+</html>

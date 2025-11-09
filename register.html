@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Title -->
+    <title>The Palatin - Hotel &amp; Resort Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+ 
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+     <header class="header-area">
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul id="headerDiv"></ul>
+                                <div class="menu-btn">
+
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ##### create account Area Start ##### -->
+    <section class="pool-area section-padding-100 bg-img bg-fixed"
+        style="background-image: url(img/bg-img/4.png); padding-top: 180px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="pool-content text-center wow fadeInUp" data-wow-delay="300ms">
+                        <div class="section-heading text-center white">
+                            <div class="line-"></div>
+                            <h2>Create Your Account</h2>
+                            <p>Join us to start booking amazing guesthouses</p>
+                        </div>
+
+                        <div id="registerForm" class="register-form">
+
+                            <!-- First Name & Last Name -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstNameInput" required placeholder="Enter your first name">
+                                    <span id="firstNameInputError" class="error-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastNameInput" required placeholder="Enter your last name">
+                                    <span id="lastNameInputError" class="error-message"></span>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="emailInput" required placeholder="your.email@example.com">
+                                <span id="emailInputError" class="error-message"></span>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phoneInput" required placeholder="+216 XX XXX XXX">
+                                <span id="telInputError" class="error-message"></span>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="addressInput" required placeholder="Your full address">
+                                <span id="addressInputError" class="error-message"></span>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="passwordInput" required placeholder="Enter a strong password"
+                                    minlength="6">
+                                <span id="passwordInputError" class="error-message"></span>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPasswordInput" required
+                                    placeholder="Re-enter your password">
+                                <span id="confirmePasswordInputError" class="error-message"></span>
+                            </div>
+
+                            <!-- User Type -->
+                            <div class="form-group">
+                                <label style="margin-bottom: 15px;">I am a:</label>
+                                <div class="radio-group">
+                                    <label>
+                                        <input type="radio" name="userType" value="client" checked>
+                                        <span>Client (Guest)</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="userType" value="owner">
+                                        <span>Owner (Guesthouse Owner)</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button onclick="signUp()" type="submit" class="btn palatin-btn mt-30">Create
+                                    Account</button>
+                                <p class="login-link">
+                                    Already have an account? <a href="login.html">Login here</a>
+                                </p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-lg-5">
+                    <div class="footer-widget-area mt-50">
+                        <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                            sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
+                            finibus. </p>
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Find us on the map</h6>
+                        <img src="img/bg-img/footer-map.png" alt="">
+                    </div>
+                </div>
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                        <form action="#" method="post" class="subscribe-form">
+                            <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Copywrite Text -->
+                <div class="col-12">
+                    <div class="copywrite-text mt-30">
+                        <p><a href="#">
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                                template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                    href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/auth.js"></script>
+    <script>generateHeader()</script>
+</body>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Admin Dashboard - The Palatin</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/styleAdmin.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+<header class="header-area">
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+                        <a href="index.html" class="nav-brand"><img src="img/core-img/logo.png" alt=""></a>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <div class="classy-menu">
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+                            <div class="classynav">
+                                <ul id="headerDiv"></ul>
+                                <div class="menu-btn">
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Admin Dashboard Section ##### -->
+    <section class="admin-dashboard" style="padding-top: 20vh;">
+        <div class="container">
+
+            <!-- Admin Header -->
+            <div class="admin-header">
+                <h1><i class="fas fa-chart-line"></i> Admin Dashboard</h1>
+                <p>Welcome back, <strong id="adminName">Admin</strong> - Manage your platform</p>
+            </div>
+
+            <!-- Admin Navigation -->
+            <div class="admin-nav text-center">
+                <a href="#" class="admin-nav-btn active" onclick="showSection('dashboard')">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="admin-nav-btn" onclick="showSection('pending-owners')">
+                    <i class="fas fa-user-clock"></i> Pending Owners
+                </a>
+                <a href="#" class="admin-nav-btn" onclick="showSection('all-users')">
+                    <i class="fas fa-users"></i> All Users
+                </a>
+                <a href="#" class="admin-nav-btn" onclick="showSection('maisons')">
+                    <i class="fas fa-home"></i> Maisons
+                </a>
+                <a href="#" class="admin-nav-btn" onclick="showSection('chambres')">
+                    <i class="fas fa-bed"></i> Chambres
+                </a>
+                <a href="#" class="admin-nav-btn" onclick="showSection('reservations')">
+                    <i class="fas fa-calendar-check"></i> Réservations
+                </a>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div id="dashboard-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-user-clock"></i>
+                        <h3 id="pendingCount">0</h3>
+                        <p>Pending Owners</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-home"></i>
+                        <h3 id="totalMaisons">0</h3>
+                        <p>Maisons d'hôtes</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3 id="totalReservations">0</h3>
+                        <p>Réservations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Owners Section -->
+            <div id="pending-owners-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-user-clock"></i> Pending Owners</h2>
+                    <div class="data-table" id="pendingOwnersTable"></div>
+                </div>
+            </div>
+
+            <!-- All Users Section -->
+            <div id="all-users-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> All Users</h2>
+                    <div class="data-table" id="allUsersTable"></div>
+                </div>
+            </div>
+
+            <!-- Maisons Section -->
+            <div id="maisons-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-home"></i> Maisons d'hôtes</h2>
+                    <div class="data-table" id="maisonsTable"></div>
+                </div>
+            </div>
+
+            <!-- Chambres Section -->
+            <div id="chambres-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-bed"></i> Chambres</h2>
+                    <div class="data-table" id="chambresTable"></div>
+                </div>
+            </div>
+
+            <!-- Reservations Section -->
+            <div id="reservations-section" style="display: none;">
+                <div class="data-section">
+                    <h2 class="section-title"><i class="fas fa-calendar-check"></i> Réservations</h2>
+                    <div class="data-table" id="reservationsTable"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <div class="footer-widget-area mt-50">
+                        <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
+                            sceleri sque, at rutrum nulla dictum.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Find us on the map</h6>
+                        <img src="img/bg-img/footer-map.png" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
+                        <form action="#" method="post" class="subscribe-form">
+                            <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="copywrite-text mt-30">
+                        <p>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- Scripts -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        generateHeader();
+        loadAdminData();
+    </script>
+</body>
+
+</html>
