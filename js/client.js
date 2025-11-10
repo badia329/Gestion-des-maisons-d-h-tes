@@ -30,8 +30,14 @@ function displayHouses() {
       content += `
         <div class="col-12 col-md-6 col-lg-4 mb-4">
           <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
-            <div class="bg-thumbnail bg-img" style="background-image: url('${housesTab[i].imageUrl || "img/bg-img/16.jpg"}'); height: 250px;"></div>
-            ${minPrice ? `<p class="price-from">From ${minPrice} DT/night</p>` : ''}
+            <div class="bg-thumbnail bg-img" style="background-image: url('${
+              housesTab[i].imageUrl || "img/bg-img/16.jpg"
+            }'); height: 250px;"></div>
+            ${
+              minPrice
+                ? `<p class="price-from">From ${minPrice} DT/night</p>`
+                : ""
+            }
             
             <div class="rooms-text" style="padding: 30px;">
               <div class="line"></div>
@@ -48,9 +54,13 @@ function displayHouses() {
                 </div>
               </div>
               
-              <p style="margin-bottom: 20px;">${housesTab[i].description.substring(0, 100)}...</p>
+              <p style="margin-bottom: 20px;">${housesTab[
+                i
+              ].description.substring(0, 100)}...</p>
               
-              <button class="btn palatin-btn w-100" onclick="goToRooms(${housesTab[i].id})">
+              <button class="btn palatin-btn w-100" onclick="goToRooms(${
+                housesTab[i].id
+              })">
                 <i class="fas fa-door-open"></i> View Rooms
               </button>
             </div>
@@ -83,7 +93,7 @@ function displayRooms() {
 
   const house = searchObjByIdAndKey(houseId, "houses");
   const roomsTab = getStoredData("rooms");
-  
+
   // Display house name
   const houseNameElement = document.getElementById("selectedHouseName");
   if (houseNameElement && house) {
@@ -99,7 +109,9 @@ function displayRooms() {
       content += `
         <div class="col-12 col-md-6 col-lg-4 mb-4">
           <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
-           <div class="bg-thumbnail bg-img" style="background-image: url('${roomsTab[i].imageUrl || "img/bg-img/1.jpg"}'); height: 200px;"></div>
+           <div class="bg-thumbnail bg-img" style="background-image: url('${
+             roomsTab[i].imageUrl || "img/bg-img/1.jpg"
+           }'); height: 200px;"></div>
             <p class="price-from">From ${roomsTab[i].price} DT/night</p>
             
             <div class="rooms-text" style="padding: 30px;">
@@ -120,7 +132,9 @@ function displayRooms() {
               
               <p style="margin-bottom: 20px;">${roomsTab[i].description}</p>
               
-              <button class="btn palatin-btn w-100" onclick="goToBooking('${roomsTab[i].id}')">
+              <button class="btn palatin-btn w-100" onclick="goToBooking('${
+                roomsTab[i].id
+              }')">
                 <i class="fas fa-calendar-check"></i> Book Now
               </button>
             </div>
@@ -150,7 +164,7 @@ function displayRooms() {
 
 function goToBooking(roomId) {
   const connectedUserId = localStorage.getItem("connectedUser");
-  
+
   if (!connectedUserId) {
     alert("Please login first to book a room!");
     location.replace("login.html");
@@ -165,7 +179,7 @@ function goToBooking(roomId) {
 
 function loadRoomForBooking() {
   const roomId = localStorage.getItem("selectedRoomId");
-  
+
   if (!roomId) {
     alert("No room selected!");
     location.replace("index.html");
@@ -173,7 +187,7 @@ function loadRoomForBooking() {
   }
 
   const room = searchObjByIdAndKey(roomId, "rooms");
-  
+
   if (!room) {
     alert("Room not found!");
     location.replace("index.html");
@@ -195,9 +209,9 @@ function loadRoomForBooking() {
 
   // Set max guests
   document.getElementById("guestsInput").setAttribute("max", room.capacity);
-  
+
   // Set min date to today
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   document.getElementById("checkInInput").setAttribute("min", today);
   document.getElementById("checkOutInput").setAttribute("min", today);
 }
@@ -207,33 +221,55 @@ function calculateBookingPrice() {
   const checkIn = getValue("checkInInput");
   const checkOut = getValue("checkOutInput");
   const guests = getValue("guestsInput");
-  
+
   if (checkIn && checkOut) {
     const checkInDate = new Date(checkIn);
     const checkOutDate = new Date(checkOut);
-    
+
     if (checkOutDate > checkInDate) {
-      const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+      const nights = Math.ceil(
+        (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
+      );
       const roomId = localStorage.getItem("selectedRoomId");
       const room = searchObjByIdAndKey(roomId, "rooms");
-      
+
       if (room) {
         const totalPrice = nights * room.price;
-        
+
         document.getElementById("summaryNights").textContent = nights;
         document.getElementById("summaryGuests").textContent = guests || 0;
-        document.getElementById("summaryPricePerNight").textContent = room.price + " DT";
+        document.getElementById("summaryPricePerNight").textContent =
+          room.price + " DT";
         document.getElementById("totalPrice").textContent = totalPrice + " DT";
       }
     }
   }
 }
-
+function isRoomAvailable(roomId, checkInDate, checkOutDate) {
+  const reservations = getStoredData("reservations");
+  
+  const checkIn = new Date(checkInDate);
+  const checkOut = new Date(checkOutDate);
+  
+  for (let i = 0; i < reservations.length; i++) {
+   
+    if (reservations[i].roomId == roomId) {
+      const reservedCheckIn = new Date(reservations[i].checkIn);
+      const reservedCheckOut = new Date(reservations[i].checkOut);
+      
+      if (checkIn < reservedCheckOut && checkOut > reservedCheckIn) {
+        return false;
+      }
+    }
+  }
+  
+  return true; 
+}
 // ==================== CONFIRM BOOKING ====================
 
 function confirmBooking() {
   const connectedUserId = localStorage.getItem("connectedUser");
-  
+
   if (!connectedUserId) {
     alert("Please login first!");
     location.replace("login.html");
@@ -262,7 +298,7 @@ function confirmBooking() {
   }
 
   const room = searchObjByIdAndKey(roomId, "rooms");
-  
+
   if (guests > room.capacity) {
     alert(`Maximum ${room.capacity} guests for this room!`);
     return;
@@ -275,8 +311,16 @@ function confirmBooking() {
     alert("Check-out date must be after check-in date!");
     return;
   }
+  if (!isRoomAvailable(roomId, checkIn, checkOut)) {
+    alert(
+      "❌ Sorry! This room is not available for the selected dates.\nPlease choose different dates."
+    );
+    return;
+  }
 
-  const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+  const nights = Math.ceil(
+    (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
+  );
   const totalPrice = nights * room.price;
 
   // Create reservation
@@ -291,7 +335,7 @@ function confirmBooking() {
     nights: nights,
     totalPrice: totalPrice,
     status: "confirmed",
-    bookingDate: new Date().toISOString().split('T')[0]
+    bookingDate: new Date().toISOString().split("T")[0],
   };
 
   reservationsTab.push(reservation);
@@ -306,7 +350,7 @@ function confirmBooking() {
 
 function displayBasket() {
   const connectedUserId = localStorage.getItem("connectedUser");
-  
+
   if (!connectedUserId) {
     alert("Please login first!");
     location.replace("login.html");
@@ -320,7 +364,7 @@ function displayBasket() {
   for (let i = 0; i < reservationsTab.length; i++) {
     if (reservationsTab[i].userId == connectedUserId) {
       hasReservations = true;
-      
+
       const room = searchObjByIdAndKey(reservationsTab[i].roomId, "rooms");
       const house = room ? searchObjByIdAndKey(room.houseId, "houses") : null;
 
@@ -331,31 +375,49 @@ function displayBasket() {
               <div class="row">
                 <div class="col-md-8">
                   <h5 class="card-title">
-                    <i class="fas fa-home"></i> ${house ? house.houseName : "Unknown House"}
+                    <i class="fas fa-home"></i> ${
+                      house ? house.houseName : "Unknown House"
+                    }
                   </h5>
                   <h6 class="text-muted">
-                    <i class="fas fa-bed"></i> ${room ? room.name : "Unknown Room"} 
-                    <span class="badge badge-info">${room ? room.type : ""}</span>
+                    <i class="fas fa-bed"></i> ${
+                      room ? room.name : "Unknown Room"
+                    } 
+                    <span class="badge badge-info">${
+                      room ? room.type : ""
+                    }</span>
                   </h6>
                   
                   <hr>
                   
                   <div class="row mt-3">
                     <div class="col-6">
-                      <p><i class="fas fa-calendar-alt"></i> <strong>Check-in:</strong> ${reservationsTab[i].checkIn}</p>
-                      <p><i class="fas fa-calendar-alt"></i> <strong>Check-out:</strong> ${reservationsTab[i].checkOut}</p>
+                      <p><i class="fas fa-calendar-alt"></i> <strong>Check-in:</strong> ${
+                        reservationsTab[i].checkIn
+                      }</p>
+                      <p><i class="fas fa-calendar-alt"></i> <strong>Check-out:</strong> ${
+                        reservationsTab[i].checkOut
+                      }</p>
                     </div>
                     <div class="col-6">
-                      <p><i class="fas fa-moon"></i> <strong>Nights:</strong> ${reservationsTab[i].nights}</p>
-                      <p><i class="fas fa-users"></i> <strong>Guests:</strong> ${reservationsTab[i].guests}</p>
+                      <p><i class="fas fa-moon"></i> <strong>Nights:</strong> ${
+                        reservationsTab[i].nights
+                      }</p>
+                      <p><i class="fas fa-users"></i> <strong>Guests:</strong> ${
+                        reservationsTab[i].guests
+                      }</p>
                     </div>
                   </div>
                 </div>
                 
                 <div class="col-md-4 text-center">
-                  <h3 class="text-success">${reservationsTab[i].totalPrice} DT</h3>
+                  <h3 class="text-success">${
+                    reservationsTab[i].totalPrice
+                  } DT</h3>
                   <p class="text-muted">Total Price</p>
-                  <button class="btn btn-danger w-100" onclick="cancelReservation(${reservationsTab[i].id})">
+                  <button class="btn btn-danger w-100" onclick="cancelReservation(${
+                    reservationsTab[i].id
+                  })">
                     <i class="fas fa-times"></i> Cancel Reservation
                   </button>
                 </div>
