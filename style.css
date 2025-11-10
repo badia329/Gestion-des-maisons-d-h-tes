@@ -2406,10 +2406,15 @@ img {
   text-align: center;
   width: 100%;
 }
+<<<<<<< HEAD
 .pool-area .register-form label {
   color: #fff;
   font-weight: 500;
 }
 .breadcumb-title {
+=======
+
+h3 {
+>>>>>>> a9838afe5a4a5bdcbb0151c48007462020427095
   color: white;
 }
